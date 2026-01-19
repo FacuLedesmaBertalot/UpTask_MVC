@@ -1,4 +1,4 @@
-<div class="contenedor">
+<div class="contenedor crear">
     <h1>UpTask</h1>
     <p class="tagline">Crea y Administra Tus Proyectos</p>
 
