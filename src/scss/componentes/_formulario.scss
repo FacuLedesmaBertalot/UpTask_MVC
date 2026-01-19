@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
@@ -16,7 +17,7 @@
             flex: 1;
             padding: 1rem;
             border: none;
-            background-color: lighten(v.$gris, 40%);
+            background-color: color.scale(v.$gris, $lightness: 40%);
         }
     }
 
