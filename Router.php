@@ -6,21 +6,38 @@ class Router
 {
     public array $getRoutes = [];
     public array $postRoutes = [];
+    
 
     public function get($url, $fn)
     {
         $this->getRoutes[$url] = $fn;
     }
 
+
     public function post($url, $fn)
     {
         $this->postRoutes[$url] = $fn;
     }
 
+
     public function comprobarRutas()
     {
+        // --- LÓGICA DE LIMPIEZA (MANTENER ESTO) ---
+        $currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'];
+        $scriptDir = dirname($scriptName);
 
-        $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        if (strpos($currentUrl, '?') !== false) $currentUrl = explode('?', $currentUrl)[0];
+        $scriptDir = str_replace('\\', '/', $scriptDir);
+        if ($scriptDir !== '/' && strpos($currentUrl, $scriptDir) === 0) {
+            $currentUrl = substr($currentUrl, strlen($scriptDir));
+        }
+        if (strpos($currentUrl, '/index.php') === 0) {
+            $currentUrl = str_replace('/index.php', '', $currentUrl);
+        }
+        if ($currentUrl === '' || $currentUrl === false) $currentUrl = '/';
+        // ------------------------------------------
+
         $method = $_SERVER['REQUEST_METHOD'];
 
         if ($method === 'GET') {
@@ -29,14 +46,14 @@ class Router
             $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
-
-        if ( $fn ) {
-            // Call user fn va a llamar una función cuando no sabemos cual sera
-            call_user_func($fn, $this); // This es para pasar argumentos
+        if ($fn) {
+            // ESTA LÍNEA ES LA QUE CARGA TU PÁGINA
+            call_user_func($fn, $this);
         } else {
             echo "Página No Encontrada o Ruta no válida";
         }
     }
+
 
     public function render($view, $datos = [])
     {
