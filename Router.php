@@ -20,9 +20,7 @@ class Router
     }
 
 
-    public function comprobarRutas()
-    {
-        // --- LÓGICA DE LIMPIEZA (MANTENER ESTO) ---
+    public function comprobarRutas() {
         $currentUrl = $_SERVER['REQUEST_URI'] ?? '/';
         $scriptName = $_SERVER['SCRIPT_NAME'];
         $scriptDir = dirname($scriptName);
