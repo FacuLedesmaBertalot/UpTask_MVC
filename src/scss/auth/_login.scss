@@ -21,4 +21,14 @@
             font-size: 10rem;
         }
     }
+
+    input[type="submit"] {
+        @include m.boton(v.$cyan, v.$blanco);
+    }
+
+    .acciones {
+        a {
+            color: v.$cyan;
+        }
+    }
 }
