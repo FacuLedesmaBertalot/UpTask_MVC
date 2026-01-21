@@ -13,6 +13,7 @@
                     id="nombre"
                     placeholder="Tu Nombre">
             </div>
+
             <div class="campo">
                 <label for="email">Email</label>
                 <input
