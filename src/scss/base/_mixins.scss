@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'base/variables' as v;
 
 /** Media Queries **/
@@ -35,13 +36,30 @@
         width: auto;
     }
     &:hover {
-        background-color: darken( $bgColor, 10% );
+        background-color: color.adjust($bgColor, $lightness: -10%);
         cursor: pointer;
-    }
+}
 }
 
 @mixin grid($columnas, $espaciado ) {
     display: grid;
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin textoDegradado($color) {
+    // Cambie lighten() por color.scale()
+    background: linear-gradient(
+        to right, 
+        $color 0%, 
+        color.scale($color, $lightness: 30%) 100%);
+            
+    color: transparent;
+    background-clip: text;
+    text-align: center;
+    font-size: 7rem;
+
+    @include tablet {
+        font-size: 10rem;
+    }
 }
