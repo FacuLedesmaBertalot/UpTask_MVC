@@ -4,18 +4,18 @@
 
 .olvide {
     margin-top: 5rem;
-    
+
     .uptask {
-        @include m.textoDegradado(v.$rosa);
+        @include m.textoDegradado(v.$cyan);
     }
 
     input[type="submit"] {
-        @include m.boton(v.$rosa, v.$blanco);
+        @include m.boton(v.$cyan, v.$blanco);
     }
 
     .acciones {
         a {
-            color: v.$rosa;
+            color: v.$cyan;
         }
     }
 }
