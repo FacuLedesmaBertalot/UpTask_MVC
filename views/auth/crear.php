@@ -11,7 +11,8 @@
                     type="text"
                     name="nombre"
                     id="nombre"
-                    placeholder="Tu Nombre">
+                    placeholder="Tu Nombre"
+                    value="<?php echo $usuario->nombre ?>">
             </div>
 
             <div class="campo">
@@ -20,7 +21,8 @@
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Tu Email">
+                    placeholder="Tu Email"
+                    value="<?php echo $usuario->email ?>">>
             </div>
 
             <div class="campo">
