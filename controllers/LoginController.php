@@ -55,8 +55,14 @@ class LoginController {
     }
 
 
-    public static function mensaje() {
-        echo "Desde Mensaje";
+    public static function mensaje(Router $router) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        }
+
+        // Muestra la Vista
+        $router->render('auth/mensaje', [
+            'titulo' => 'Cuenta Creada Exitosamente'
+        ]);
     }
 
     
