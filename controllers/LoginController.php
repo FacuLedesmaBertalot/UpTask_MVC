@@ -135,6 +135,21 @@ class LoginController {
         $alertas = Usuario::getAlertas();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Añadir el nuevo password
+            $usuario->sincronizar($_POST);
+
+            // Validar el password
+
+            // --- ESTA LÍNEA ES LA SOLUCIÓN AL ERROR ROJO validarPassword---
+            /** @var \Model\Usuario $usuario */
+            $alertas = $usuario->validarPassword();
+
+            if (empty($alertas)) {
+                // Hashear el nuevo password
+
+                debuguear($usuario);
+            }
+
         }
 
         // Muestra la Vista
