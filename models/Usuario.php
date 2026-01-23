@@ -6,6 +6,7 @@ class Usuario extends ActiveRecord {
     protected static $tabla ='usuarios';
     protected static $columnasDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
 
+    
     public $id;
     public $nombre;
     public $email;
@@ -13,6 +14,7 @@ class Usuario extends ActiveRecord {
     public $password2;
     public $token;
     public $confirmado;
+
 
     public function __construct($args = []) {
         $this->id = $args['id'] ?? null;
@@ -23,6 +25,7 @@ class Usuario extends ActiveRecord {
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? 0;
     }
+
 
     // Validación para cuentas nuevas
     public function validarNuevaCuenta() {
@@ -58,14 +61,28 @@ class Usuario extends ActiveRecord {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             self::$alertas['error'][] = 'Email No Válido';
         }
-
         return self::$alertas;
     }
+
+
+    // Valida el password
+    public function validarPassword() {       
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El Password No Puede ir Vacío';
+        }
+
+        if (strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El Password Debe Contener al Menos 6 Caracteres';
+        }
+        return self::$alertas;
+    }
+
 
     // Hashea password
     public function hashPassword() {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
+
 
     // Generar token
     public function crearToken() {
