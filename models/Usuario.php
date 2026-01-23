@@ -44,7 +44,19 @@ class Usuario extends ActiveRecord {
 
         if ($this->password !== $this->password2) {
             self::$alertas['error'][] = 'Los Password son Diferentes';
+        }
 
+        return self::$alertas;
+    }
+
+
+    // Valida un Email
+    public function validarEmail() {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'Email No Válido';
         }
 
         return self::$alertas;
