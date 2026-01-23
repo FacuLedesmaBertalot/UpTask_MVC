@@ -10,6 +10,7 @@ class Usuario extends ActiveRecord {
     public $nombre;
     public $email;
     public $password;
+    public $password2;
     public $token;
     public $confirmado;
 
@@ -18,6 +19,7 @@ class Usuario extends ActiveRecord {
         $this->nombre = $args['nombre'] ?? '';
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
+        $this->password2 = $args['password2'] ?? '';
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? '';
     }
@@ -30,6 +32,19 @@ class Usuario extends ActiveRecord {
 
         if (!$this->email) {
             self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
+        }
+
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El Password No Puede ir Vacío';
+        }
+
+        if (strlen($this->email) < 6) {
+            self::$alertas['error'][] = 'El Password Debe Contener al Menos 6 Caracteres';
+        }
+
+        if ($this->password !== $this->password2) {
+            self::$alertas['error'][] = 'Los Password son Diferentes';
+
         }
 
         return self::$alertas;
