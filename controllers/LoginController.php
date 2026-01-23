@@ -146,10 +146,19 @@ class LoginController {
 
             if (empty($alertas)) {
                 // Hashear el nuevo password
+                $usuario->hashPassword();
 
-                debuguear($usuario);
+                // Eliminar el token
+                $usuario->token = null;
+
+                // Guardar el usuario en la DB
+                $resultado = $usuario->guardar();
+
+                // Redireccionar
+                if ($resultado) {
+                    header('Location: /');
+                }
             }
-
         }
 
         // Muestra la Vista
