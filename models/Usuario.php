@@ -38,7 +38,7 @@ class Usuario extends ActiveRecord {
             self::$alertas['error'][] = 'El Password No Puede ir Vacío';
         }
 
-        if (strlen($this->email) < 6) {
+        if (strlen($this->password) < 6) {
             self::$alertas['error'][] = 'El Password Debe Contener al Menos 6 Caracteres';
         }
 
