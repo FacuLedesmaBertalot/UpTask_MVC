@@ -12,16 +12,29 @@ class LoginController {
     $alertas = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $auth = new Usuario($_POST);
+            $usuario = new Usuario($_POST);
 
-            $alertas = $auth->validarLogin();
+            $alertas = $usuario->validarLogin();
 
             if (empty($alertas)) {
                 // Verificar que el usuario exista
-                
+                $usuario = Usuario::where('email', $usuario->email);
+
+            // --- ESTA LÍNEA ES LA SOLUCIÓN AL ERROR ROJO !$usuario->confirmado---
+            /** @var \Model\Usuario $usuario */
+                if (!$usuario || !$usuario->confirmado) {
+                    Usuario::setAlerta('error', 'El Usuario No Existe o No Está Confirmado');
+                } else {
+                    // El Usuario existe
+                    
+                }
+
+
             }
 
         }
+
+        $alertas = Usuario::getAlertas();
 
         // Render a la vista
         $router->render('auth/login', [
