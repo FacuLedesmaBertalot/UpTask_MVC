@@ -129,18 +129,24 @@ class ActiveRecord {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
         $resultado = self::consultarSQL($query);
 
-        return $resultado; // <--- CORREGIDO: Devuelve todos, no uses array_shift aquí
+        return $resultado; // <--- CORREGIDO: Devuelve todos, no usar array_shift aca
     }
 
     // Busca un registro por su id
     public static function where($columna, $valor) {
         $valor = self::$db->escape_string($valor); // <--- CORREGIDO: Seguridad añadida
-
         $query = "SELECT * FROM " . static::$tabla  . " WHERE {$columna} = '{$valor}'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
 
+    // Busca todos los registros que pertenecen a un ID
+    public static function belongsTo($columna, $valor) {
+        $valor = self::$db->escape_string($valor); // <--- CORREGIDO: Seguridad añadida
+        $query = "SELECT * FROM " . static::$tabla  . " WHERE {$columna} = '{$valor}'";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
 
     // Consulta Plana de SQL (utilizar cuando los métodos del modelo no son suficientes)
     public static function SQL($query) {
