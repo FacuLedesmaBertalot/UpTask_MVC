@@ -36,23 +36,41 @@ class DashboardController {
                 // Almacenar el creador del proyecto
                 $proyecto->propietarioId = $_SESSION['id'];
 
-
-
                 // Guardar el Proyecto
                 $proyecto->guardar();
 
                 // Redireccionar
                 header('Location: /proyecto?id=' . $proyecto->url);
             }
-            
         }
         
         $router->render('dashboard/crear-proyecto', [
             'titulo' => 'Crear Proyecto',
             'alertas' => $alertas
         ]);
-        
     }
+
+
+    public static function proyecto(Router $router) {
+        session_start();
+        isAuth();
+
+        $token = $_GET['id'];
+
+        if (!$token) header('Location: /dashboard');
+        // Revisar que la persona que visita el proyecto, es quien lo creo
+        $proyecto = Proyecto::where('url', $token);
+
+        /** @var \Model\Proyecto $proyecto */
+        if ($proyecto->propietarioId !== $_SESSION['id']) {
+            header('Location: /dashboard');
+        }
+
+        $router->render('dashboard/proyecto', [
+            'titulo' => $proyecto->proyecto
+        ]);
+    }
+
 
     public static function perfil(Router $router) {
 
