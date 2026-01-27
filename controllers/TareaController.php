@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Model\Proyecto;
+
 class TareaController {
 
     public static function index() {
@@ -10,12 +12,28 @@ class TareaController {
 
     public static function crear() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            session_start();
 
-        $respuesta = [
-            'proyectoId' => $_POST['proyectoId']
-        ];
+            $proyectoId = $_POST['proyectoId'];
 
-        echo json_encode($respuesta);
+            $proyecto = Proyecto::where('url', $proyectoId);
+
+            /** @var \Model\Proyecto $proyecto  marcaba error en ->propietarioId*/
+            if (!$proyecto || $proyecto->propietarioId !== $_SESSION['id']) {
+                $respuesta = [
+                    'tipo' => 'error',
+                    'mensaje' => 'Hubo un Error al Agregar la Tarea'
+                ];
+                echo json_encode($respuesta);
+                
+            } else {
+                $respuesta = [
+                    'tipo' => 'exito',
+                    'mensaje' => 'Tarea Agregada Correctamente'
+                ];
+                echo json_encode($respuesta);
+
+            }
         }
     }
         
