@@ -40,10 +40,26 @@
                 setTimeout(() => {
                     modal.remove();
                     }, 500);
-                }
+            }
+
+            if (e.target.classList.contains('submit-nueva-tarea')) {
+                submitFormularioNuevaTarea();
+            }
         })
 
         document.querySelector('body').appendChild(modal);
 
+    }
+
+    function submitFormularioNuevaTarea() {
+        const tarea = document.querySelector('#tarea').ariaValueMax.trim();
+
+        if (tarea === '') {
+            // Mostrar una alerta de error
+            
+
+            return;
+        } 
+        
     }
 })();
