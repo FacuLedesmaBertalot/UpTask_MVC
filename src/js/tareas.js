@@ -27,6 +27,11 @@
         
         `;
 
+        setTimeout(() => {
+            const formulario = document.querySelector('.formulario');
+            formulario.classList.add('animar');
+        }, 3000);
+
         document.querySelector('body').appendChild(modal);
 
     }
