@@ -27,5 +27,9 @@
             transform: translateY(-50%);
             opacity: 1;
         }
+        &.cerrar {
+            transform: translateY(-200%);
+            opacity: 0;      
+        }
     }
 }
