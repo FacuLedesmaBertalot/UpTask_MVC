@@ -270,7 +270,6 @@
     function confirmarEliminarTarea(tarea) {
         Swal.fire({
             title: "Eliminar Tarea?",
-            icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Si",
             confirmButtonColor: '#4338CA', // Valor de $indigo
@@ -284,10 +283,30 @@
 
 
     async function eliminarTarea(tarea) {
+        const { estado, id, nombre } = tarea;
+
         const datos = new FormData();
+        datos.append('id', id);
+        datos.append('nombre', nombre);
+        datos.append('estado', estado);
+        datos.append('proyectoId', obtenerProyecto());
 
         
         try {
+            const url = 'http://uptask.test/api/tarea/eliminar';
+            const respuesta = await fetch(url, {
+                method: 'POST',
+                body: datos
+            });
+
+            const resultado = await respuesta.json();
+            if (resultado.resultado) {
+                Swal.fire('Eliminado!', resultado.mensaje, 'success');
+
+                tareas = tareas.filter( tareaMemoria => tareaMemoria.id !== tarea.id);
+                mostrarTareas();
+            }
+
             
         } catch (error) {
             console.log(error);
