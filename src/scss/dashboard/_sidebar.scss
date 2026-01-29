@@ -25,6 +25,10 @@
         }
     }
 
+    &.ocultar {
+        opacity: 0;
+    }
+
     @include m.tablet {
         height: 100%;
         opacity: 1;
@@ -32,11 +36,31 @@
         background-color: v.$indigo;
     }
 
-    h2 {
-        color: v.$blanco;
-        margin: 0;
-        text-align: center;
+    .contenedor-sidebar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            color: v.$blanco;
+            margin: 0;
+            text-align: center;
+        }
+
+        .cerrar-menu {
+            display: flex;
+            justify-content: center;
+            height: 2rem;
+            width: 2rem;
+            img {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
     }
+
+
 
     .sidebar-nav {
         margin-top: 5rem;
