@@ -130,6 +130,9 @@ class DashboardController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuario = Usuario::find($_SESSION['id']);
 
+            // Sincronizar con los datos del uuario
+            $usuario->sincronizar($_POST);
+
             debuguear($usuario);
         }
 
