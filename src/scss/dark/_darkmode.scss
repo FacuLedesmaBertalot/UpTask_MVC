@@ -15,7 +15,8 @@
         color: v.$blanco;
     }
     .descripcion-pagina,
-    .formulario .campo input {
+    .formulario .campo input,
+    .nombre-pagina {
         color: v.$grisClaro;
     }
 
@@ -26,5 +27,29 @@
 
     .alerta.error {
         background-color: v.$blanco;
+    }
+
+    .barra-mobile {
+        background-color: color.scale(v.$grisOscuro, $lightness: -5%);
+    }
+
+
+    .dashboard {
+        background-color: $grisOscuro;
+
+        .enlace {
+            color: v.$grisClaro;
+
+            &:hover {
+                color: color.scale(v.$grisClaro, $lightness: -20%);
+            }
+        }
+    }
+
+    .listado-proyectos .proyecto {
+        background-color: color.scale(v.$grisOscuro, $lightness: 20%);
+        &:hover {
+            background-color: color.scale(v.$grisOscuro, $lightness: 10%);
+        }
     }
 }
