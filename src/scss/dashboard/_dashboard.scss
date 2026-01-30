@@ -35,4 +35,12 @@
             font-size: 1.4rem;
         }
     }
+
+    .enlace {
+        color: v.$indigo;
+        &:hover {
+            
+        color: color.scale(v.$indigo, $lightness: -20%);
+        }
+    }
 }
