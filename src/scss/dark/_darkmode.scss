@@ -22,6 +22,9 @@
 
     .formulario .campo input {
          background-color: color.scale(v.$grisOscuro, $lightness: 5%);
+         &::placeholder {
+                color: color.scale(v.$grisClaro, $lightness: -20%);
+         }
     }
 
 
@@ -29,8 +32,36 @@
         background-color: v.$blanco;
     }
 
-    .barra-mobile {
+    .sidebar {
+        @include m.tablet {
+            background-color: color.scale(v.$grisOscuro, $lightness: -5%);
+        }
+        .sidebar-nav a {
+            &.activo,
+            &:hover {
+                background-color: v.$naranja;
+            }
+        }
+    }      
+
+
+    .barra-mobile,
+    .barra {
         background-color: color.scale(v.$grisOscuro, $lightness: -5%);
+    }
+    .barra {
+        p {
+            color: v.$grisClaro;
+
+            span {
+                color: v.$naranja;
+            }
+        }
+        .cerrar-sesion {
+            @include m.boton(v.$naranja, v.$blanco);
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
     }
 
     .filtros {
@@ -40,7 +71,7 @@
             color: v.$blanco;
         }
         input[type="radio"] {
-            accent-color: $grisOscuro;
+            accent-color: v.$naranja;
         }
     }
 
@@ -52,6 +83,13 @@
             color: v.$grisClaro;
 
             &:hover {
+                color: color.scale(v.$grisClaro, $lightness: -20%);
+            }
+        }
+        .formulario input:not([type="submit"]) {
+            background-color: color.scale(v.$grisOscuro, $lightness: 20%);
+            color: v.$blanco;
+            &::placeholder {
                 color: color.scale(v.$grisClaro, $lightness: -20%);
             }
         }
@@ -67,6 +105,21 @@
         background-color: color.scale(v.$grisOscuro, $lightness: 10%);
         border: none;
         p {
+            color: v.$grisClaro;
+        }
+    }
+
+    .modal .formulario {
+        background-color: $grisOscuro;
+        input[type="text"] {
+            background-color: color.scale(v.$grisOscuro, $lightness: 20%);
+            border: none;
+            color: v.$blanco;
+            &::placeholder {
+                color: color.scale(v.$grisClaro, $lightness: -20%);
+            }
+        }
+        legend {
             color: v.$grisClaro;
         }
     }
