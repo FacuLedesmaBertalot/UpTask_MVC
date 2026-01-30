@@ -33,6 +33,17 @@
         background-color: color.scale(v.$grisOscuro, $lightness: -5%);
     }
 
+    .filtros {
+        background-color: color.scale(v.$grisOscuro, $lightness: 10%);
+        h2, 
+        label {
+            color: v.$blanco;
+        }
+        input[type="radio"] {
+            accent-color: $grisOscuro;
+        }
+    }
+
 
     .dashboard {
         background-color: $grisOscuro;
@@ -50,6 +61,13 @@
         background-color: color.scale(v.$grisOscuro, $lightness: 20%);
         &:hover {
             background-color: color.scale(v.$grisOscuro, $lightness: 10%);
+        }
+    }
+    .listado-tareas .tarea {
+        background-color: color.scale(v.$grisOscuro, $lightness: 10%);
+        border: none;
+        p {
+            color: v.$grisClaro;
         }
     }
 }
