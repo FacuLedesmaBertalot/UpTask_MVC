@@ -133,7 +133,12 @@ class DashboardController {
             // Sincronizar con los datos del uuario
             $usuario->sincronizar($_POST);
 
-            debuguear($usuario);
+            /** @var \Model\Usuario $usuario->nuevo_password()*/
+            $alertas = $usuario->nuevo_password();
+
+            if (empty($alertas)) {
+                
+            }
         }
 
 
