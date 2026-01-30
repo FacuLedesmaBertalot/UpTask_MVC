@@ -110,6 +110,21 @@ class Usuario extends ActiveRecord {
     }
 
 
+    public function nuevo_password() {
+        if(!$this->password_actual) {
+            self::$alertas['error'][] = 'El Password Actual No Puede ir Vacío';
+        }
+        if(!$this->password_nuevo) {
+            self::$alertas['error'][] = 'El Password Nuevo No Puede ir Vacío';
+        }
+        if(strlen($this->password_nuevo) < 6) {
+            self::$alertas['error'][] = 'El Password Debe Contener al Menos 6 Caracteres';
+        }
+
+        return self::$alertas;
+    }
+
+
     // Hashea password
     public function hashPassword() {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
