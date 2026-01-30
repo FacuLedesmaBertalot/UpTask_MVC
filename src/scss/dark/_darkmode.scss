@@ -7,7 +7,24 @@
         background-color: $grisOscuro;
     }
 
-    .tagline {
+    .tagline,
+    .formulario label,
+    .login .acciones a,
+    .crear .acciones a,
+    .olvide .acciones a {
         color: v.$blanco;
+    }
+    .descripcion-pagina,
+    .formulario .campo input {
+        color: v.$grisClaro;
+    }
+
+    .formulario .campo input {
+         background-color: color.scale(v.$grisOscuro, $lightness: 5%);
+    }
+
+
+    .alerta.error {
+        background-color: v.$blanco;
     }
 }
