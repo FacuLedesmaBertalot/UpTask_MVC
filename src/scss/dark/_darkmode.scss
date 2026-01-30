@@ -1,0 +1,13 @@
+@use 'sass:color';
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+@media (prefers-color-scheme: dark) {
+    $grisOscuro: #2C2C3B;
+    body {
+        background-color: $grisOscuro;
+    }
+
+    .tagline {
+        color: v.$blanco;
+    }
+}
