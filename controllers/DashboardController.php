@@ -127,6 +127,12 @@ class DashboardController {
         
         $alertas = [];
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario = Usuario::find($_SESSION['id']);
+
+            debuguear($usuario);
+        }
+
 
         $router->render('dashboard/cambiar-password', [
             'titulo' => 'Cambiar Password',
