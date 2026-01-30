@@ -92,16 +92,24 @@ class DashboardController {
             $alertas = $usuario->validar_perfil();
 
             if (empty($alertas)) {
-                // Guardar el Usuario
-                $usuario->guardar();
 
-                Usuario::setAlerta('exito', 'Guardado Correctamente');
-                $alertas = $usuario->getAlertas();
+                $existeUsuario = Usuario::where('email', $usuario->email);
 
-                // Asignar el nombre nuevo a la barra
-                $_SESSION['nombre'] = $usuario->nombre;
+                if ($existeUsuario && $existeUsuario->id !== $usuario->id) {
+                    // Mensajede error
+                    Usuario::setAlerta('error', 'Email No Válido, Cuenta Ya Registrada');
+                    $alertas = $usuario->getAlertas();
+                } else {
+                    // Guardar el registro
+                    $usuario->guardar();
+
+                    Usuario::setAlerta('exito', 'Guardado Correctamente');
+                    $alertas = $usuario->getAlertas();
+
+                    // Asignar el nombre nuevo a la barra
+                    $_SESSION['nombre'] = $usuario->nombre;
+                }
             }
-
         }
         
         $router->render('dashboard/perfil', [
